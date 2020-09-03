@@ -1,31 +1,17 @@
-import base64
-from datetime import datetime
-
 import requests
 from requests.auth import HTTPBasicAuth
 from access_token import generate_access_token
+from encode import generate_password
+from utils import get_timestamp
 import keys
 
 
-
-#print(datetime.now())
-#2020-09-01 20:15:44.178417
-unformatted_time = datetime.now()
-formatted_time = unformatted_time.strftime("%Y%m%d%H%M%S")
-
-#print(formatted_time, "This is the formatted time")
-
-data_to_encode = keys.business_shortCode + keys.lipa_na_mpesa_passkey + formatted_time
-encoded_string = base64.b64encode(data_to_encode.encode())
-#print(encoded_string)
-decoded_password = encoded_string.decode("utf-8")
-
-
-#print(my_access_token, "this should be an access token")
-
 def lipa_na_mpesa():
 
+	formatted_time = get_timestamp()
+	decoded_password = generate_password(formatted_time)
 	access_token = generate_access_token()
+	
 	api_url = "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest"
 
 	headers = { "Authorization": "Bearer %s" % access_token }

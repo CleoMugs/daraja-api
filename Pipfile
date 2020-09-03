@@ -7,6 +7,9 @@ verify_ssl = true
 
 [packages]
 requests = "*"
+django = "*"
+django-rest-framework = "*"
+markdown = "*"
 
 [requires]
 python_version = "3.6"
