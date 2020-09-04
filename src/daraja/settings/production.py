@@ -22,14 +22,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = 'y_@0uz&iom5nke(*k+60o=)yecdse8^u6z(1mbv98pt^ju*i2)'
+#SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['fierce-lowlands-29050.herokuapp.com']
 
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -80,15 +80,20 @@ WSGI_APPLICATION = 'daraja.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'daraja',
+        'USER':'cleo',
+        'PASSWORD':'kakosh123',
+        'HOST':'localhost',
+        'PORT': '5432',
     }
 }
 
 import dj_database_url 
-db_from_env = dj_database_url.config
+
+db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
-DATABASES['default'][CONN_MAX_AGE] = 500
+DATABASES['default']['CONN_MAX_AGE'] = 500
 
 
 # Password validation
@@ -148,9 +153,8 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "staticfiles")]
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static-cdn-local')
 
 
-
 CORS_REPLACE_HTTPS_REFERER = True
-HOST_SCHEME = "http://"
+HOST_SCHEME = "https://"
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
